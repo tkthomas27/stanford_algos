@@ -1,3 +1,7 @@
+
+# inspired by https://en.wikipedia.org/wiki/Karatsuba_algorithm
+# debugged using http://stackoverflow.com/questions/15860257/karatsuba-algorithm-incorrect-result
+
 def karatsuba( num1, num2 ):
     
     if min(num1, num2) < 10:
