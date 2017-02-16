@@ -1,62 +1,94 @@
 
+# test sizes
+# size first last median
+# 10 25 29 21
+# 100 615 587 518
+# 1000 10297 10184 8921
+
+# ---------------------------------------------------------------------
+
+# read in data
+intarray_raw = ("/Users/kthomas1/github/stanford_algos/course1/quicksort_t2.txt")
+intarray_open = open(intarray_raw, 'r')
+with intarray_open as f:
+    intarray = [int(integers.strip()) for integers in f.readlines()]
+
+intarray1 = intarray
+intarray2 = list(reversed(intarray))
+intarray3 = intarray
+
+# ---------------------------------------------------------------------
+
+# pivot first element
 def partition(A,l,r):
-    p = A[l]
-    i = l+1
-    j = l+1
-    for j in range (j,r):
+    i = l
+    p = A[i]
+    for j in range (l+1,r+1):
         if A[j] < p:
-            A[j], A[i] = A[i], A[j]
             i = i+1
-    A[l], A[i-1] = A[i-1], A[l]
-    
-    return A, i
-
-x = [3,8,2,5,1,4,7,6]
-
-aa = partition(x,0,len(x))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# pivot element 1
-
-def partition(A,l,r):
-    p = A[l]
-    i = l+1
-    j = l+1
-    for j in range (j,r):
-        if A[j] < p:
             A[j], A[i] = A[i], A[j]
-            i = i+1
-    A[l], A[i-1] = A[i-1], A[l]
+    A[i], A[l] = A[l], A[i]
     
-    return i
+    return i 
 
 def quicksort(A,l,r):
-    
+    global ml 
+    ml = ml+r-1
     if l<r:
-    
-        # parittion
-        i = partition(A,l,r)
-        
-        quicksort(A,l,i-1)
-        quicksort(A,i+1,r)
+        i = partition(A,l,r) # partition
+        quicksort(A,l,i-1) # quicksort first partition
+        quicksort(A,i+1,r) # quicksort second partition
+    return A, ml
+
+ml=0
+sorted_array1, ml = quicksort(intarray1,0,len(intarray1)-1)
+
+# ---------------------------------------------------------------------
+
+# # pivot last element
+# def partition(A,l,r):
+#     i = l
+#     p = A[i]
+#     for j in range (l+1,r+1):
+#         if A[j] < p:
+#             i = i+1
+#             A[j], A[i] = A[i], A[j]
+#     A[i], A[l] = A[l], A[i]
+#     return i 
+
+# def quicksort(A,l,r):
+#     global mr
+#     mr = mr+r-1 #count comparisons
+#     if l<r:
+#         i = partition(A,l,r) # partition
+#         quicksort(A,l,i-1) # quicksort first partition
+#         quicksort(A,i+1,r) # quicksort second partition
+#     return A, mr
+
+# mr=len(intarray2)
+# sorted_array2, mr = quicksort(intarray2,0,len(intarray2)-1)
+
+# ---------------------------------------------------------------------
+
+# pivot random element
+
+# ---------------------------------------------------------------------
+
+print(ml)
 
 
-x = [54,26,93,17,77,31,44,55,20]
-quicksort(x,0,len(x))
-x
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
